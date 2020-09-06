@@ -1,0 +1,66 @@
+{
+  "name": "mern-social-from-scratch",
+  "version": "1.0.0",
+  "description": "A MERN stack based social media application created from tutorial",
+  "main": "./dist/server.generated.js",
+  "author": "Win Lam",
+  "license": "MIT",
+  "keywords": [
+    "express",
+    "mern",
+    "mongodb",
+    "mongoose",
+    "node",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/winplam/mern-social.git"
+  },
+  "homepage": "https://github.com/winplam/mern-social",
+  "scripts": {
+    "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
+    "dev": "nodemon",
+    "dev:env": "env-cmd -f ./config/dev.env nodemon",
+    "start": "NODE_ENV=production node ./dist/server.generated.js",
+    "test": "jest --watchAll",
+    "test:coverage": "jest --verbose --coverage",
+    "test:env": "env-cmd -f ./config/test.env jest --watchAll",
+    "test:inband": "jest --watchAll --runInBand --detectOpenHandles",
+    "test:verbose": "jest --watchAll --verbose"
+  },
+  "engines": {
+    "node": "13.12.0",
+    "npm": "6.14.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "@hot-loader/react-dom": "^16.13.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "babel-loader": "^8.1.0",
+    "env-cmd": "^10.1.0",
+    "jest": "^26.4.2",
+    "mongodb-memory-server": "^6.6.7",
+    "prettier": "^2.1.1",
+    "supertest": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "helmet": "^4.1.0",
+    "mongoose": "^5.10.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
