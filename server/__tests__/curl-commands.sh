@@ -15,11 +15,12 @@ curl -s -X POST -H "Content-Type:application/json" http://localhost:3000/api/use
 
 'GET:/api/users - Fetching the user list'
 curl -s http://localhost:3000/api/users | jq
+ID=$(curl -s http://localhost:3000/api/users | jq | jq -r ".[2]._id") && echo $ID
+ID2=$(curl -s http://localhost:3000/api/users | jq | jq -r ".[1]._id") && echo $ID2
 
 'GET:/api/users/:id - Trying to fetch a non-existing single user'
 curl -i http://localhost:3000/api/users/zzz
 
-ID=5f4e037544a1cb75e4c9280f && echo $ID
 'GET:/api/users/:id - Trying to fetch an existing single user'
 curl -s http://localhost:3000/api/users/${ID} | jq
 
@@ -32,15 +33,13 @@ curl -X POST -H "Content-Type:application/json" http://localhost:3000/auth/signi
 'POST:/api/signin - Attempting to signing in - Wrong password'
 curl -X POST -H "Content-Type:application/json" http://localhost:3000/auth/signin -d '{"email":"bob@mymail.com","password":"wrong_password"}'
 
-'POST:/api/signin - Signing in successfully'
+'*** POST:/api/signin - Signing in successfully ***'
+TOKEN=$(curl -s -X POST -H "Content-Type:application/json" http://localhost:3000/auth/signin -d '{"email":"bob@mymail.com","password":"mypassword"}' | jq -r ".token") && echo $TOKEN
 curl -X POST -H "Content-Type:application/json" http://localhost:3000/auth/signin -d '{"email":"bob@mymail.com","password":"mypassword"}'
 curl -X POST -H "Content-Type:application/json" http://localhost:3000/auth/signin -d '{"email":"sally@mymail.com","password":"mypassword"}'
-TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjRlMDM3NTQ0YTFjYjc1ZTRjOTI4MGYiLCJpYXQiOjE1OTk0MTQ4MjYsImV4cCI6MTU5OTQxNDg4Nn0.eAj4zUsdMY0eLBV1FuAuoxI0cuChKYMnvHbQzlQV4ZQ
-echo $TOKEN
 
-'GET:/api/users/:id - Fetching a single user successfully', () => {
+'GET:/api/users/:id - Fetching a single user successfully'
 curl http://localhost:3000/api/users/${ID} -H "Content-Type:application/json" -H "Authorization:Bearer ${TOKEN}"
-ID2=5f4e037c44a1cb75e4c92810 && echo $ID2
 curl http://localhost:3000/api/users/${ID2} -H "Content-Type:application/json" -H "Authorization:Bearer ${TOKEN}"
 
 'PUT:/api/users/:id - Attempt to update non-existing user'

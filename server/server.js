@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
 import config from '../config/config'
+import mongoose from 'mongoose'
 import app from './express'
 
 // MongoDB Database Connection
