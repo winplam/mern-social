@@ -9,7 +9,7 @@ import devBundle from './devBundle'
 import template from './template'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
-// import postRoutes from './routes/post.routes'
+import postRoutes from './routes/post.routes'
 // modules for server side rendering
 // import MainRouter from '../client/MainRouter'
 
@@ -27,7 +27,7 @@ app.use(helmet())
 
 app.use('/', userRoutes)
 app.use('/', authRoutes)
-// app.use('/', postRoutes)
+app.use('/', postRoutes)
 
 app.get('*', (req, res) => {
   const markup = ('<h1>Markup from express.js 0</h1>')
