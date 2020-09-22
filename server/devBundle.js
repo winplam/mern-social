@@ -6,7 +6,7 @@ import config from '../config/config'
 
 const compile = (app) => {
   if (config.env === 'development') {
-    console.log('---------- devBundle.js compile for DEVELOPMENT')
+    console.log(`---------- devBundle.js compile for ${config.env.toUpperCase()}`)
     const compiler = webpack(webpackConfig)
     const middleware = webpackMiddleware(compiler, {
       publicPath: webpackConfig.output.publicPath
